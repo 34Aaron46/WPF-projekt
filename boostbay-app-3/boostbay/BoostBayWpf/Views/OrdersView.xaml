@@ -1,0 +1,39 @@
+<UserControl x:Class="BoostBayWpf.Views.OrdersView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="280"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Grid.Column="0" Margin="0,0,10,0" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}"
+                  AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Vevő" Binding="{Binding CustomerName}" Width="*"/>
+                <DataGridTextColumn Header="Termék" Binding="{Binding Product.Name}" Width="*"/>
+                <DataGridTextColumn Header="Db" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Összeg" Binding="{Binding Total}"/>
+                <DataGridTextColumn Header="Állapot" Binding="{Binding Status}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <GroupBox Grid.Column="1" Header="Rendelés" Padding="8">
+            <StackPanel>
+                <Label Content="Vevő neve"/>
+                <TextBox Text="{Binding SelectedOrder.CustomerName}"/>
+                <Label Content="Termék"/>
+                <ComboBox ItemsSource="{Binding Products}" DisplayMemberPath="Name" SelectedValuePath="Id"
+                          SelectedValue="{Binding SelectedOrder.ProductId}"/>
+                <Label Content="Darabszám"/>
+                <TextBox Text="{Binding SelectedOrder.Quantity}"/>
+                <Label Content="Állapot"/>
+                <ComboBox ItemsSource="{Binding StatusList}" SelectedItem="{Binding SelectedOrder.Status}"/>
+                <WrapPanel>
+                    <Button Content="Új" Command="{Binding NewCommand}"/>
+                    <Button Content="Mentés" Command="{Binding SaveCommand}"/>
+                    <Button Content="Törlés" Command="{Binding DeleteCommand}"/>
+                    <Button Content="Állapot átírása" Command="{Binding StatusCommand}"/>
+                </WrapPanel>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>
