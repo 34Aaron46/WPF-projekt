@@ -1,0 +1,22 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: tuning-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: tuningkatalogus
+      MYSQL_USER: tuning
+      MYSQL_PASSWORD: tuning123
+    ports:
+      - "3307:3306"
+    volumes:
+      - tuning-adat:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-utuning", "-ptuning123"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  tuning-adat:
