@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "TuningKatalogusApi\\TuningKatalogusApi.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "TuningKatalogusWpf\\TuningKatalogusWpf.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
