@@ -1,0 +1,5 @@
+cd C:\Utvonal\TuningKatalogus
+docker compose up -d
+docker compose ps
+cd TuningKatalogusApi
+dotnet run
