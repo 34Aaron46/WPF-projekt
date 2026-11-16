@@ -1,0 +1,55 @@
+﻿<Application x:Class="TuningKatalogusWpf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- kozos stilusok hogy ne kelljen mindenhol megadni -->
+        <!-- szinek: vilagos narancs hatter sotet barna szoveg narancs keret -->
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="0,5,5,0"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Background" Value="#FFE8D6"/>
+            <Setter Property="Foreground" Value="#9A3412"/>
+            <Setter Property="BorderBrush" Value="#E8590C"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,2,0,8"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="BorderBrush" Value="#B0B0B0"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,2,0,8"/>
+        </Style>
+
+        <!-- a tablazat fejlece es a sorok -->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#FFE8D6"/>
+            <Setter Property="Foreground" Value="#9A3412"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="8,6"/>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="AlternationCount" Value="2"/>
+            <Setter Property="AlternatingRowBackground" Value="#FFF4EC"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#E5E5E5"/>
+        </Style>
+
+        <!-- a jobb oldali szerkeszto doboz -->
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="#E8590C"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <!-- az also sor sotet szurke feher szoveggel -->
+        <Style TargetType="StatusBar">
+            <Setter Property="Background" Value="#2B2B2B"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="6,3"/>
+        </Style>
+    </Application.Resources>
+</Application>

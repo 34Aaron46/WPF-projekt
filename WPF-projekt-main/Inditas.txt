@@ -1,0 +1,43 @@
+TUNING KATALOGUS - INDITAS
+
+1. DOCKER
+- Docker Desktop elinditasa, megvarni amig fut (Engine running)
+
+2. POWERSHELL
+- Windows gomb -> PowerShell -> Enter
+
+3. 3306-OS PORT ELLENORZESE
+    docker ps
+- Ha a PORTS oszlopban valahol 3306 szerepel, a NAMES oszlopbol a nevet kimasolni:
+    docker stop kontener-neve
+
+4. MYSQL KONTENER LETREHOZASA
+    docker run --name mysql-dev -e MYSQL_ROOT_PASSWORD=root123 -p 3306:3306 -d mysql:8
+- Ha a nev foglalt: docker rm -f mysql-dev, majd ujra a parancs
+- 20 masodpercet varni (Docker Desktop -> Containers -> mysql-dev -> Logs -> "ready for connections")
+
+5. ADATBAZIS LETREHOZASA
+    docker exec mysql-dev mysql -uroot -proot123 -e "CREATE DATABASE IF NOT EXISTS tuning_katalogus;"
+
+6. PROJEKT
+- Zip kicsomagolasa
+- Megnyitni: Javitott\TuningKatalogus.sln (Visual Studio)
+- Ellenorzes: TuningKatalogusApi\appsettings.json
+    Server=127.0.0.1;Port=3306;Database=tuning_katalogus;User=root;Password=root123;
+
+7. INDITAS
+- Solution jobb klikk -> Configure Startup Projects -> Multiple startup projects
+- TuningKatalogusApi = Start (legyen felul), TuningKatalogusWpf = Start
+- F5
+- A tablakat es a kezdo adatokat az API indulaskor magatol letrehozza
+
+8. ELLENORZES
+- Swagger: http://localhost:5080/swagger
+- GET /api/Kategoriak -> 200 es adatok
+
+HIBAK
+- Unable to connect -> MySQL meg indul, varni, Logs fület nezni
+- Access denied -> jelszo nem egyezik az appsettings.json-nal
+- Port is already allocated -> masik kontener foglalja: docker stop kontener-neve
+- WPF: nem hozhato letre kapcsolat (localhost:5080) -> az API nem fut, elobb azt inditsd el
+- docker: command not found -> PowerShellben kell futtatni, nem a kontener Exec fulen

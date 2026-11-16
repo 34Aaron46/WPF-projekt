@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="TuningKatalogusWpf.Views.RendelesekView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:TuningKatalogusWpf.ViewModels"
+             Loaded="UserControl_Loaded">
+
+    <UserControl.DataContext>
+        <vm:RendelesekViewModel/>
+    </UserControl.DataContext>
+
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="{Binding Uzenet}"/>
+        </StatusBar>
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="280"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Column="0" Margin="0,0,10,0"
+                      ItemsSource="{Binding Rendelesek}"
+                      SelectedItem="{Binding KivalasztottRendeles}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Vevő" Binding="{Binding VevoNev}" Width="*"/>
+                    <DataGridTextColumn Header="Termék" Binding="{Binding Termek.Nev}" Width="*"/>
+                    <DataGridTextColumn Header="Db" Binding="{Binding Darab}"/>
+                    <DataGridTextColumn Header="Összeg" Binding="{Binding Osszeg}"/>
+                    <DataGridTextColumn Header="Állapot" Binding="{Binding Allapot}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GroupBox Grid.Column="1" Header="Rendelés" Padding="8">
+                <StackPanel>
+                    <Label Content="Vevő neve"/>
+                    <TextBox Text="{Binding KivalasztottRendeles.VevoNev}"/>
+
+                    <Label Content="Termék"/>
+                    <ComboBox ItemsSource="{Binding Termekek}"
+                              DisplayMemberPath="Nev"
+                              SelectedValuePath="Id"
+                              SelectedValue="{Binding KivalasztottRendeles.TermekId}"/>
+
+                    <Label Content="Darabszám"/>
+                    <TextBox Text="{Binding KivalasztottRendeles.Darab}"/>
+
+                    <Label Content="Állapot"/>
+                    <ComboBox ItemsSource="{Binding AllapotLista}"
+                              SelectedItem="{Binding KivalasztottRendeles.Allapot}"/>
+
+                    <TextBlock TextWrapping="Wrap" Foreground="Gray" FontSize="11"
+                               Text="Meglévő rendelésnél csak a vevő neve és az állapot módosítható."/>
+
+                    <WrapPanel>
+                        <Button Content="Új" Command="{Binding UjCommand}"/>
+                        <Button Content="Mentés" Command="{Binding MentesCommand}"/>
+                        <Button Content="Törlés" Command="{Binding TorlesCommand}"/>
+                        <Button Content="Állapot átírása" Command="{Binding AllapotCommand}"/>
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </DockPanel>
+</UserControl>
